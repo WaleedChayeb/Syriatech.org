@@ -1,2 +1,73 @@
 # Syriatech.org
-Syriatech.org Community Official Source Code
+Welcome to the Syriatech.org Community Source Code.
+
+The mission of the Syria Tech Community is to represent, inspire, support, and help lead the Syrian technology community and ecosystem to create a better future for all. Led by group of tech companies and expert syrian influencers, the Syria Tech Community focus on issues important to the technology sector and Syria.
+
+Visit: [Syriatech.org](http://syriatech.org)
+
+![Syriatech Logo](http://syriatech.org/img/bak.png)
+
+
+## Syriatech.org Tech Stack and Features
+This application is built using .Net Core 2.2 and its:
+* Code First
+* Clean Architecture
+* MS SQL Database
+* Hosted on Windows Azure
+* ASP.NET Identity
+* ASP.NET Core MVC
+* API is enabled for certain operations
+* Razor view Engine, Razor Pages
+* Html, Css, Javascript
+* Bootstrap 4
+
+## Syriatech.org Software Architecture
+I used the Clean Architecture or what it used to be called Hexagonal Architecture, Onion Architecture or DDD. 
+
+As descriped in Microsoft's Official documentation:
+> Clean architecture puts the business logic and application model at the center of the application. Instead of having business logic depend on data access or other infrastructure concerns, this dependency is inverted: infrastructure and implementation details depend on the Application Core.
+
+
+![Clean Architecture](https://docs.microsoft.com/en-us/dotnet/standard/modern-web-apps-azure-architecture/media/image5-7.png)
+
+
+### Project Layers
+* Core
+  * Syriatech.Application: Contains all of the logical operations
+  * Syriatech.Domain: Contains the basic entities.
+* Infrastructure
+  * Syriatech.Persistence: The data Layer
+* Presentation 
+  * Syriatech.WebUI: Contains the Web.API and the .Core MVC Website
+  
+
+## Syriatech.org Open API
+If you are interested in building and application on top of Syriatech.org you can use the following open APIs:
+  
+### Get All Events 
+``` 
+/api/v1/events/getall
+```
+  
+### Get All Profiles
+``` 
+/api/v1/profiles/getall
+```
+  
+### Get Profile by Username
+``` 
+/api/v1/profiles/get/{username}
+```
+
+## Contributing
+Syriatech.org is under MIT License, you can fork it and develop any new feature you want then if its working fine we will publish it to the running website. The credit of the new feature will be for the developer and it will hold his/her name as a feature title.
+
+Please follow the change log here:
+[Syriatech.org/log](http://syriatech.org/log)
+
+  
+  
+  
+  
+  
+  
