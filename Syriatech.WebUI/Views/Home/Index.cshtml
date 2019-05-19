@@ -1,0 +1,172 @@
+﻿@*@model PaginatedList<DevListing.Data.ApplicationUser>
+@{
+    ViewData["Title"] = Localizer["Home Page"];
+    ViewData["SeoDesc"] = "تعزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria"; 
+    ViewData["SeoBio"] = "ابحث عن مبرمجين، مصممين، صانعي محتوى، كتاب، مسوقين سوريين في سوريا لتعزيز المناخ التقني في سوريا - خبرات محلية بمستوى جودة عالي";
+    ViewData["SeoPicture"] = "img/bak.png"; 
+
+
+    var majors = (List<Majors>)ViewData["majors"];
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 id="typedwords" class="jumbotron-heading">
+            @Localizer["Hire Syrian"]
+            <strong>
+                <span id="typed"></span>
+            </strong>
+        </h1>
+        <p class="lead text-muted">
+            @Localizer["Empowering Tech Ecosystem in Syria"]
+        </p>
+        <p>
+            <a class="btn btn-primary my-2" asp-area="Identity" asp-page="/Account/Manage/Index">@Localizer["Join Community"]</a>
+            <a asp-area="" asp-controller="LoveSyria" asp-action="Index" class="btn btn-secondary my-2">@Localizer["Made in Syria"]</a>
+        </p>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <partial name="_CookieConsentPartial" />
+    <div class="container">
+        <div class="row justify-content-start pb-3">
+
+            <div class="col-md-2 mb-3">
+                <select class="custom-select d-block w-100" id="field" onchange="changeFields()">
+                    <option value="0">@Localizer["Fields"]</option>
+                    @foreach (var item in majors)
+                    {
+                        if (Localizer["Language"].Value == "ar")
+                        {
+                            <option value="@item.Id">@item.APluralName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.EPluralName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+
+        </div>
+        <div class="row pb-5">
+            @if (Model.Count > 0)
+            {
+                @foreach (var item in Model)
+                {
+
+                    if (!String.IsNullOrEmpty(item.UserName) && !String.IsNullOrEmpty(item.FirstName) && !String.IsNullOrEmpty(item.LastName) && !String.IsNullOrEmpty(item.Bio)) { 
+                    var maj = majors.Where(a => a.Id == item.Major).SingleOrDefault();
+                    string img = item.Picture;
+                    if (String.IsNullOrWhiteSpace(img))
+                    {
+                        img = "img/default.png";
+                    }
+                    <div class="col-md-3 p-1">
+                        <div class="card " style="height:450px;overflow:hidden; position:relative;">
+                            <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName" class="card-link text-dark">
+                                <div style=" height: 250px;overflow: hidden;margin: 10px;position: relative; text-align:center;">
+                                    <img src="@img" style="width: 250px; height:250px;object-fit: cover;margin-left:auto; margin-right:auto; border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                                    @if (item.Bio.Count() > 70)
+                                    {
+                                        <p class="card-text">@item.Bio.Substring(0, 70) ...</p>
+
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text">@item.Bio ...</p>
+
+                                    }
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        @if (Localizer["Language"].Value == "ar")
+                                        {
+                                            <small class="text-muted">@maj.ASingularName</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted">@maj.ESingularName</small>
+                                        }
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    }
+                }
+            }
+            else
+            {
+
+            }
+
+
+
+        </div>
+        <div class="row justify-content-md-center pt-3">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <li class="page-item">
+                        <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-type="@ViewData["type"]"
+                           class="page-link @prevDisabled">
+                            @Localizer["Previous"]
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-type="@ViewData["type"]"
+                           class="page-link @nextDisabled">
+                            @Localizer["Next"]
+                        </a>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>*@
+
+
+@section Scripts {
+
+    <script>
+        function changeFields() {
+            var newUrl = '/Home/Index?type=' + document.getElementById("field").value;
+            // Simulate a mouse click:
+            window.location.href = window.location.origin + newUrl;
+        }
+        function changeExperience() {
+            var newUrl = '/Home/Index?experience=' + document.getElementById("experience").value;
+            // Simulate a mouse click:
+            window.location.href = window.location.origin + newUrl;
+        }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39140946-4');
+    </script>
+}

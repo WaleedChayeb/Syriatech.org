@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = Localizer["Events"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["SeoDesc"] = " الفعاليات التقنية في سوريا - عزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria"; 
+    ViewData["SeoBio"] = " الفعاليات والأحداث التقنية في سوريا ابحث عن مبرمجين، مصممين، صانعي محتوى، كتاب، مسوقين سوريين في سوريا لتعزيز المناخ التقني في سوريا - خبرات محلية بمستوى جودة عالي";
+    ViewData["SeoPicture"] = "img/bak.png"; 
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+
+<div class="container">
+    <h1>@Localizer["Events"]</h1>
+    <hr />
+    <p class="text-muted">@Localizer["No Events yet!"] <br />@Localizer["Do you have an idea of event and you need to be sponsered?"] <a asp-area="" asp-controller="Contact" asp-action="Index">@Localizer["Contact Us"]</a></p>
+    <br />
+</div>
+
+@section Scripts{
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39140946-4');
+    </script>
+
+}

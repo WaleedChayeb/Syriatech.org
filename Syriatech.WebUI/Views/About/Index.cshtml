@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = Localizer["About"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewData["SeoDesc"] = "تعزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria"; 
+    ViewData["SeoBio"] = "ابحث عن مبرمجين، مصممين، صانعي محتوى، كتاب، مسوقين سوريين في سوريا لتعزيز المناخ التقني في سوريا - خبرات محلية بمستوى جودة عالي";
+    ViewData["SeoPicture"] = "img/bak.png"; 
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+<div class="container">
+    <h1>   @Localizer["About"]</h1>
+    <hr />
+    <p></p>
+    <br />
+    <p>   @Localizer["The mission of the Syria Tech Community is to represent, inspire, support, and help lead the Syrian technology community and ecosystem to create a better future for all."]</p>
+    <p>   @Localizer["Syria Tech Community Led by group of tech companies and expert syrian influencers."]</p> 
+    <br />
+    <img src="~/img/bak.png" />
+
+</div>
+
+
+@section Scripts{
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39140946-4');
+    </script>
+
+}

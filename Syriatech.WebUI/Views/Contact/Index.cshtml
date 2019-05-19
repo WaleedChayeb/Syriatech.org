@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = Localizer["Contact"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewData["SeoDesc"] = "تعزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria"; 
+    ViewData["SeoBio"] = "ابحث عن مبرمجين، مصممين، صانعي محتوى، كتاب، مسوقين سوريين في سوريا لتعزيز المناخ التقني في سوريا - خبرات محلية بمستوى جودة عالي";
+    ViewData["SeoPicture"] = "img/bak.png"; 
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+    <div class="container">
+        <h1>@Localizer["Contact"]</h1>
+        <hr />
+        <p><b>@Localizer["General Support and Questions"]:</b> (Waleed Chayeb) waleedchayeb2@gmail.com</p>
+        <br />      
+        <a class="btn   btn-success" href="https://www.facebook.com/groups/syriatech.org/" target="_blank">Our Facebook Group</a>
+
+    </div>
+
+@section Scripts{
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39140946-4');
+    </script>
+
+}

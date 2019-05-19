@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = Localizer["Made with love in Syria"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewData["SeoDesc"] = " المشاريع التقنية في سوريا، صنع بكل حب في سوريا- الفعاليات التقنية في سوريا - عزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria"; 
+    ViewData["SeoBio"] = " صنع بحب في سوريا، صناعة برمجيات، مواقع، ومشاريع تقنية سورية ابحث عن مبرمجين، مصممين، صانعي محتوى، كتاب، مسوقين سوريين في سوريا لتعزيز المناخ التقني في سوريا - خبرات محلية بمستوى جودة عالي";
+    ViewData["SeoPicture"] = "img/bak.png"; 
+}
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+
+<div class="container">
+    <h1>@Localizer["Made with love in Syria"]</h1>
+    <hr />
+    <p>@Localizer["You are browsing projects made with love in Syria."]<br /> <span class="text-muted">@Localizer["Do you want to list your project here?"] </span> <a asp-area="Identity" asp-page="/Account/Login">@Localizer["Join Community"]</a></p>
+    <br />
+
+    <div class="row">
+ 
+
+    </div>
+    <div class="row justify-content-md-center">
+        
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39140946-4');
+    </script>
+
+}

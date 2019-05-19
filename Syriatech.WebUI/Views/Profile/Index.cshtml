@@ -1,0 +1,84 @@
+﻿@*@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@model DevListing.Models.ProfileModel
+@{
+    ViewData["Title"] = Model.FirstName + " " + Model.LastName + "  " ;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var majors = (List<Majors>)ViewData["majors"];
+    var maj = majors.Where(a => a.Id == Model.Major).SingleOrDefault();
+
+     
+    ViewData["SeoDesc"] = "الملف الشخصي لـ " +  Model.FirstName + " " + Model.LastName + "  - Syriatech Community"; 
+    ViewData["SeoBio"] =  Model.FirstName + " " + Model.LastName + "  " + Model.Title + " " + Model.Bio;
+    ViewData["SeoPicture"] = Model.Picture; 
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.FirstName @Model.LastName</h1>
+            <h4 class="text-muted">@Model.Title</h4>
+
+            <br />
+            <p>@Model.Bio</p>
+            <br />
+            <br />
+            <h4 class="text-muted">@Localizer["Skills"]</h4>
+            <p>@Model.Skills</p>
+
+
+            <h4 class="text-muted">@Localizer["Interests"]</h4>
+            <p>@Model.Interests</p>
+
+
+            <h4 class="text-muted">@Localizer["Best Project"]</h4>
+            <p>@Model.BestProject</p>
+        </div>
+        <div class="col-md-4">
+            <img src="@Model.Picture" class="img-thumbnail" />
+
+            <br />
+            <br />
+            <ul class="list-unstyled">
+                @foreach (var link in Model.Links)
+                {
+                    <li><a href="@link.Url" target="_blank">@link.Title</a></li>
+                }
+
+            </ul>
+            <hr />
+            <span class="text-muted ">@Localizer["Years of Experience"]:</span> <span><b>@Model.YearsOfExperience</b></span>
+            <br />
+            <span class="text-muted ">@Localizer["Major"]:</span>
+            @if (Localizer["Language"].Value == "ar")
+            {
+                <span><b>@maj.ASingularName</b></span>
+            }
+            else
+            {
+                <span><b>@maj.ESingularName</b></span>
+            }
+
+
+        </div>
+
+    </div>
+
+
+</div>*@
+
+
+@section Scripts{
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39140946-4');
+    </script>
+
+}

@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @using Microsoft.AspNetCore.Mvc.Localization;
+    @inject IViewLocalizer Localizer
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> @ViewData["Title"] - @Localizer["Syria Tech Community"]</title>
+     
+    <meta name="description" content="@ViewData["SeoDesc"]">
+    <meta name="keywords" content="Web Developers, Programmers, Designers, Content, Marketing, Search, Listing, Araic">
+    <meta name="author" content="Waleed Chayeb">
+
+
+    <meta property="og:title" content="@ViewData["Title"] - مجتمع سيرياتِك - Syriatech Community">
+    <meta property="og:description" content="@ViewData["SeoBio"]">
+    <meta property="og:image" content="http://syriatech.org/@ViewData["SeoPicture"]"> 
+
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="https://fonts.googleapis.com/css?family=Tajawal:400,700" rel="stylesheet">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+        <link href="https://fonts.googleapis.com/css?family=Tajawal:400,700" rel="stylesheet">
+    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @if (Localizer["Language"].Value == "ar")
+    {
+        <link rel="stylesheet" href="~/css/rtl.css">
+    }
+</head>
+<body>
+
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">@Localizer["Our Mission"]</h4>
+                        <p class="text-muted">@Localizer["The mission of the Syria Tech Community is to represent, inspire, support, and help lead the Syrian technology community and ecosystem to create a better future for all. Led by group of tech companies and expert syrian influencers, the Syria Tech Community focus on issues important to the technology sector and Syria."]</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">@Localizer["Community"]</h4>
+
+                        <ul class="list-unstyled">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-type="1" class="text-white">@Localizer["Developers"]</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-type="2" class="text-white">@Localizer["Designers"]</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-type="3" class="text-white">@Localizer["Marketers"]</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-type="4" class="text-white">@Localizer["Content Creators"]</a></li>
+                        </ul>
+                        <h4><a asp-area="" asp-controller="LoveSyria" asp-action="Index" class="text-white">@Localizer["Made in Syria"]</a></h4>
+                        <h4><a asp-area="" asp-controller="Events" asp-action="Index" class="text-white">@Localizer["Events"]</a></h4>
+                        <h4><a asp-area="" asp-controller="About" asp-action="Index" class="text-white">@Localizer["About"]</a></h4>
+                        <h4><a asp-area="" asp-controller="Contact" asp-action="Index" class="text-white">@Localizer["Contact"]</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container d-flex justify-content-between">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand d-flex align-items-center">
+
+                    @if (Localizer["Language"].Value == "ar")
+                    {
+                        <span>  مجتمع <span style="font-weight:200;">سيريا<span style="font-weight:600;">تِك</span></span></span>
+
+                    }
+                    else
+                    {
+                        <span style="font-weight:200;">Syria<span style="font-weight:600;">tech</span>  Community</span>
+
+                    }
+                     <span class="pl-1 pr-1 "  style="font-size:xx-small"> Beta</span>
+                </a>
+                <div class="d-flex justify-center">
+                    <div class="text-white" style="display:inline-block;padding: 0.25rem 0.75rem;">     <partial name="_LoginPartial" /></div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+    </header>
+
+
+    <main class="pt-4" role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="text-muted">
+
+        <div class="container">
+
+            <div class="float-right">
+                @await Html.PartialAsync("_SelectLanguagePartial") 
+            </div>
+
+            &copy; 2019 - @Localizer["Syriatech"] - <span> <a asp-area="" asp-controller="Log" asp-action="Index">@Localizer["Change Log"]</a></span>
+        </div>
+    </footer>
+
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script type="text/javascript" src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/typed/typed.js"></script>
+    <script type="text/javascript" src="~/lib/resize-crop/jquery.imagefit.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    @if (Localizer["Language"].Value == "ar")
+    {
+        <script>
+            var options = {
+                strings: ["مطورين", "مصممين", "مسوقين", "صانعي محتوى"],
+                typeSpeed: 70,
+                loop: true
+            }
+
+            var typed = new Typed("#typed", options);
+        </script>
+    }
+    else
+    {
+        <script>
+            var options = {
+                strings: ["Developers", "Designers", "Digital Marketers", "Content Creators"],
+                typeSpeed: 70,
+                loop: true
+            }
+
+            var typed = new Typed("#typed", options);
+        </script>
+    }
+    <script>
+        $(window).load(function () {
+            $('div.im').imagefit({
+                force: 'true',
+                halign: 'center',
+                valign: 'middle',
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
