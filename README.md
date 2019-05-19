@@ -9,14 +9,14 @@ Visit: [Syriatech.org](http://syriatech.org)
 
 
 ## Syriatech.org Tech Stack and Features
-This application is built using .Net Core 2.2 and its:
+* .Net Core 2.2
 * Code First
 * Clean Architecture
 * MS SQL Database
 * Hosted on Windows Azure
 * ASP.NET Identity
 * ASP.NET Core MVC
-* API is enabled for certain operations
+* API enabled for certain operations
 * Razor view Engine, Razor Pages
 * Html, Css, Javascript
 * Bootstrap 4
@@ -33,7 +33,7 @@ As descriped in Microsoft's Official documentation:
 
 ### Project Layers
 * Core
-  * Syriatech.Application: Contains all of the logical operations
+  * Syriatech.Application: Contains all logical operations
   * Syriatech.Domain: Contains the basic entities.
 * Infrastructure
   * Syriatech.Persistence: The data Layer
@@ -42,7 +42,7 @@ As descriped in Microsoft's Official documentation:
   
 
 ## Syriatech.org Open API
-If you are interested in building and application on top of Syriatech.org you can use the following open APIs:
+If you are interested in building an application on top of Syriatech.org you can use the following open APIs:
   
 ### Get All Events 
 ``` 
@@ -60,9 +60,14 @@ If you are interested in building and application on top of Syriatech.org you ca
 ```
 
 ## Contributing
-Syriatech.org is under MIT License, you can fork it and develop any new feature you want then if its working fine we will publish it to the running website. The credit of the new feature will be for the developer and it will hold his/her name as a feature title.
+Syriatech.org is under MIT License, you can fork it to develop any new feature, then if its working fine I will publish it to the running website. The credit of the new feature will be for the developer and it will hold his/her name as a feature title.
 
-Please follow the change log here:
+You can also replicate this project to build another community, link: Lebtech, Egytech, Iraqtech ... etc Please reach out if you have any related question: 
+
+Waleed Chayeb
+waleedchayeb2@gmail.com
+
+Follow the project changes log here:
 [Syriatech.org/log](http://syriatech.org/log)
 
   
