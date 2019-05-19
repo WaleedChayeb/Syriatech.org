@@ -58,8 +58,8 @@ If you are interested in building an application on top of Syriatech.org you can
   
 ### Projects
 ``` 
-/api/v1/profiles
-/api/v1/profiles/{username}
+/api/v1/projects
+/api/v1/projects/{id}
 ```
 
 ## Contributing
