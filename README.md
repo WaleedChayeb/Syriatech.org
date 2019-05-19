@@ -44,19 +44,22 @@ As descriped in Microsoft's Official documentation:
 ## Syriatech.org Open API
 If you are interested in building an application on top of Syriatech.org you can use the following open APIs:
   
-### Get All Events 
+### Events 
 ``` 
-/api/v1/events/getall
+/api/v1/events/
+/api/v1/events/{id}
 ```
   
-### Get All Profiles
+### Profiles
 ``` 
-/api/v1/profiles/getall
+/api/v1/profiles
+/api/v1/profiles/{username}
 ```
   
-### Get Profile by Username
+### Projects
 ``` 
-/api/v1/profiles/get/{username}
+/api/v1/profiles
+/api/v1/profiles/{username}
 ```
 
 ## Contributing
