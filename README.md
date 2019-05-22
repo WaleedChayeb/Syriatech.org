@@ -4,7 +4,8 @@ Welcome to the Syriatech.org Community Source Code.
 The mission of the Syria Tech Community is to represent, inspire, support, and help lead the Syrian technology community and ecosystem to create a better future for all. Led by group of tech companies and expert syrian influencers, the Syria Tech Community focus on issues important to the technology sector and Syria.
 
 Visit: [Syriatech.org](http://syriatech.org)
-Project Source Page: [https://waleedchayeb.github.io/Syriatech.org/] (https://waleedchayeb.github.io/Syriatech.org/)
+
+Project Source Page: [https://waleedchayeb.github.io/Syriatech.org/](https://waleedchayeb.github.io/Syriatech.org/)
 
 ![Syriatech Logo](http://syriatech.org/img/bak.png)
 
