@@ -46,14 +46,14 @@ If you are interested in building an application on top of Syriatech.org you can
   
 ### Events 
 ``` 
-/api/v1/events/
-/api/v1/events/{id}
+/api/v1/activities/
+/api/v1/activities/{id}
 ```
   
 ### Profiles
 ``` 
-/api/v1/profiles
-/api/v1/profiles/{username}
+/api/v1/users
+/api/v1/users/{username}
 ```
   
 ### Projects
