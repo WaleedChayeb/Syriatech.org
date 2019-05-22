@@ -1,0 +1,19 @@
+﻿@page
+@model Syriatech.WebUI.Areas.Identity.Pages.Account.Manage.LinksModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Links"];
+    ViewData["ActivePage"] = ManageNavPages.Links;
+        Layout = "~/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+
+
+}
+ 
+<br />
+<br />
+ 
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

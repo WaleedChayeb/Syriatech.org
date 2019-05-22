@@ -1,10 +1,16 @@
-﻿using System.Reflection; 
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection; 
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +19,9 @@ using Syriatech.Application.Events.Queries.GetEvent;
 using Syriatech.Application.Infrastructure;
 using Syriatech.Application.Infrastructure.AutoMapper;
 using Syriatech.Application.Interfaces;
+using Syriatech.Domain.Entities;
 using Syriatech.Persistence;
+using Syriatech.WebUI.Services;
 
 namespace Syriatech.WebUI
 {
@@ -25,13 +33,11 @@ namespace Syriatech.WebUI
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+         
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            { 
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -41,13 +47,34 @@ namespace Syriatech.WebUI
             services.AddMediatR(typeof(GetEventQueryHandler).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
+
             services.AddDbContext<ISyriatechDbContext, SyriatechDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SyriatechDatabase")));
+            services.AddDbContext<SyriatechDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SyriatechDatabase")));
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<SyriatechDbContext>()
+                .AddDefaultTokenProviders(); 
+            services.AddLocalization(options => options.ResourcesPath = "Resources"); 
+            services.AddMvc().AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+            .AddDataAnnotationsLocalization().SetCompatibilityVersion(CompatibilityVersion.Version_2_2); 
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("en"),
+                        new CultureInfo("ar")
+                    };
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                options.DefaultRequestCulture = new RequestCulture("ar");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            }); 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -57,16 +84,31 @@ namespace Syriatech.WebUI
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                 app.UseHsts();
+            } 
+            var supportedCultures = new[]
+{
+               new CultureInfo("en"),
+               new CultureInfo("ar"),
+            }; 
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ar"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-
+            app.UseStaticFiles(); 
+            app.UseAuthentication();
             app.UseMvc(routes =>
-            {
+            { 
+                routes.MapRoute(
+                   name: "myprofile",
+                   template: "{id}",
+                   defaults: new { controller = "Profile", action = "Index" }
+                );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

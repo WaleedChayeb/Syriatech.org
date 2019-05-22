@@ -6,7 +6,8 @@ using Syriatech.Application.Interfaces;
 using Syriatech.Domain.Entities;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 
 
@@ -24,8 +25,7 @@ namespace Syriatech.Application.Users.Queries.GetUser
         }
         public async Task<UserViewModel> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<UserViewModel>(await _context
-            .Users.Where(p => p.FirstName == request.Username)
+            var entity = _mapper.Map<UserViewModel>(await _context.Users.Where(p => p.UserName == request.Username)
             .SingleOrDefaultAsync(cancellationToken));
 
             if (entity == null)

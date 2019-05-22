@@ -42,6 +42,4 @@ namespace Syriatech.WebUI
     }
 }
 
-
-//WebHost.CreateDefaultBuilder(args)
-//                .UseStartup<Startup>();
+ 

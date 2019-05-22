@@ -15,13 +15,13 @@ namespace Syriatech.WebUI.Controllers
     public class ProfileController : NormalBaseController
     {
 
-        public async Task<IActionResult> Index(string username)
+        public async Task<IActionResult> Index(string id)
         {
             GetMajors nm = new GetMajors();
             ViewData["majors"] = nm.All();
 
-            var users =  Ok(await Mediator.Send(new GetUserQuery { Username = username }));
-            var links = Ok(await Mediator.Send(new GetAllLinksQuery {  Username = username }));
+            var users =  Ok(await Mediator.Send(new GetUserQuery { Username = id}));
+            var links = Ok(await Mediator.Send(new GetAllLinksQuery {  Username = id }));
 
             //var Profile = new ProfileModel
             //{

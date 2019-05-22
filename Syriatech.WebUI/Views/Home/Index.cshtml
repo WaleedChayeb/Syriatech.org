@@ -1,12 +1,12 @@
-﻿@*@model PaginatedList<DevListing.Data.ApplicationUser>
+﻿@model Syriatech.Application.Users.Queries.GetAllUsers.UsersListViewModel 
 @{
     ViewData["Title"] = Localizer["Home Page"];
-    ViewData["SeoDesc"] = "تعزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria"; 
+    ViewData["SeoDesc"] = "تعزيز إيجابية المناخ التقني في سوريا  -  Empowering Tech Ecosystem in Syria";
     ViewData["SeoBio"] = "ابحث عن مبرمجين، مصممين، صانعي محتوى، كتاب، مسوقين سوريين في سوريا لتعزيز المناخ التقني في سوريا - خبرات محلية بمستوى جودة عالي";
-    ViewData["SeoPicture"] = "img/bak.png"; 
+    ViewData["SeoPicture"] = "img/bak.png";
 
-
-    var majors = (List<Majors>)ViewData["majors"];
+ 
+    var majors = (List<Syriatech.Application.Majors.Majors>)ViewData["majors"];
 }
 @using Microsoft.AspNetCore.Mvc.Localization;
 @inject IViewLocalizer Localizer
@@ -55,94 +55,66 @@
 
         </div>
         <div class="row pb-5">
-            @if (Model.Count > 0)
+            @if (Model != null)
             {
-                @foreach (var item in Model)
+                foreach (var item in Model.Users)
                 {
 
-                    if (!String.IsNullOrEmpty(item.UserName) && !String.IsNullOrEmpty(item.FirstName) && !String.IsNullOrEmpty(item.LastName) && !String.IsNullOrEmpty(item.Bio)) { 
-                    var maj = majors.Where(a => a.Id == item.Major).SingleOrDefault();
-                    string img = item.Picture;
-                    if (String.IsNullOrWhiteSpace(img))
+                    if (!String.IsNullOrEmpty(item.Username) && !String.IsNullOrEmpty(item.FirstName) && !String.IsNullOrEmpty(item.LastName) && !String.IsNullOrEmpty(item.Bio))
                     {
-                        img = "img/default.png";
-                    }
-                    <div class="col-md-3 p-1">
-                        <div class="card " style="height:450px;overflow:hidden; position:relative;">
-                            <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName" class="card-link text-dark">
-                                <div style=" height: 250px;overflow: hidden;margin: 10px;position: relative; text-align:center;">
-                                    <img src="@img" style="width: 250px; height:250px;object-fit: cover;margin-left:auto; margin-right:auto; border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">@item.FirstName @item.LastName</h5>
-                                    @if (item.Bio.Count() > 70)
-                                    {
-                                        <p class="card-text">@item.Bio.Substring(0, 70) ...</p>
-
-                                    }
-                                    else
-                                    {
-                                        <p class="card-text">@item.Bio ...</p>
-
-                                    }
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        @if (Localizer["Language"].Value == "ar")
+                        var maj = majors.Where(a => a.Id == item.Major).SingleOrDefault();
+                        string img = item.Picture;
+                        if (String.IsNullOrWhiteSpace(img))
+                        {
+                            img = "img/default.png";
+                        }
+                        <div class="col-md-3 p-1">
+                            <div class="card " style="height:450px;overflow:hidden; position:relative;">
+                                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.Username" class="card-link text-dark">
+                                    <div style=" height: 250px;overflow: hidden;margin: 10px;position: relative; text-align:center;">
+                                        <img src="@img" style="width: 250px; height:250px;object-fit: cover;margin-left:auto; margin-right:auto; border-top-left-radius: calc(.25rem - 1px);border-top-right-radius: calc(.25rem - 1px);" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                                        @if (item.Bio.Count() > 70)
                                         {
-                                            <small class="text-muted">@maj.ASingularName</small>
+                                            <p class="card-text">@item.Bio.Substring(0, 70) ...</p>
+
                                         }
                                         else
                                         {
-                                            <small class="text-muted">@maj.ESingularName</small>
-                                        }
+                                            <p class="card-text">@item.Bio ...</p>
 
+                                        }
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            @if (Localizer["Language"].Value == "ar")
+                                            {
+                                                <small class="text-muted">@maj.ASingularName</small>
+                                            }
+                                            else
+                                            {
+                                                <small class="text-muted">@maj.ESingularName</small>
+                                            }
+
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     }
                 }
             }
             else
             {
 
-            }
-
-
-
+            } 
         </div>
         <div class="row justify-content-md-center pt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-
-
-                    @{
-                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                    }
-                    <li class="page-item">
-                        <a asp-action="Index"
-                           asp-route-pageNumber="@(Model.PageIndex - 1)"
-                           asp-route-type="@ViewData["type"]"
-                           class="page-link @prevDisabled">
-                            @Localizer["Previous"]
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a asp-action="Index"
-                           asp-route-pageNumber="@(Model.PageIndex + 1)"
-                           asp-route-type="@ViewData["type"]"
-                           class="page-link @nextDisabled">
-                            @Localizer["Next"]
-                        </a>
-                    </li>
-
-
-                </ul>
+            <nav aria-label="Page navigation example"> 
             </nav>
         </div>
     </div>
-</div>*@
+</div>
 
 
 @section Scripts {
@@ -158,8 +130,7 @@
             // Simulate a mouse click:
             window.location.href = window.location.origin + newUrl;
         }
-    </script>
-
+    </script> 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39140946-4"></script>
     <script>

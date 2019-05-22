@@ -1,0 +1,34 @@
+﻿body {
+    direction: rtl !important;
+    text-align: right;
+    font-family: 'Tajawal', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+    font-family: 'Tajawal', sans-serif !important;
+}
+
+.float-right {
+    float: left !important;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:first-child .page-link {
+    margin-left: unset;
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+    margin-right: 0;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.form-check-input {
+    margin-right: -1.25rem;
+    margin-left: unset;
+}

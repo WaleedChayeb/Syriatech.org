@@ -34,6 +34,12 @@ namespace Syriatech.Persistence
                 return;
             }
             SeedLinks(context);
+
+            if (context.Users.Any())
+            {
+                return;
+            }
+            SeedUsers(context);
         }
 
         private void SeedEvents(SyriatechDbContext context)
@@ -47,6 +53,19 @@ namespace Syriatech.Persistence
             };
 
             context.Events.AddRange(events); 
+            context.SaveChanges();
+        }
+
+
+        private void SeedUsers(SyriatechDbContext context)
+        {
+            var users = new[]
+            {
+                new User { BestProject = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",  Bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , City = "Aleppo", Country = "Syria", Dob =DateTime.Now, Email = "test@test.com" , EmailConfirmed = true, FirstName = "First Name" , Gender = "Male", Id = Guid.NewGuid().ToString(), Interests = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , LastName = "Last Name" , Major = 1, Picture = null, YearsOfExperience = 6, Published = true, UserName = "testuser", Title = "Test User", Skills = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", PasswordHash = "AQAAAAEAACcQAAAAENzmCBuVmSsd1ONkPYmXRq4kRZkek70syLfpxHRZk1xyoniawSHsxlYVHmV03X5DVg==" , SecurityStamp = "UCWMMZ4WSQLEOPABQ7IVURWZHXXBDJOO", ConcurrencyStamp = "27e97d6b-9811-44d5-b4cc-42fbd416fbe7", NormalizedEmail ="TEST@TEST.COM", NormalizedUserName = "Test User" }
+
+            };
+
+            context.Users.AddRange(users);
             context.SaveChanges();
         }
 

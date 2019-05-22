@@ -6,7 +6,8 @@ namespace Syriatech.WebUI.Areas.Identity.Pages.Account.Manage
     public static class ManageNavPages
     {
         public static string Index => "Index";
-
+        public static string Links => "Links";
+        public static string Projects => "Projects";
         public static string ChangePassword => "ChangePassword";
 
         public static string ExternalLogins => "ExternalLogins";
@@ -16,6 +17,8 @@ namespace Syriatech.WebUI.Areas.Identity.Pages.Account.Manage
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
+        public static string LinksNavClass(ViewContext viewContext) => PageNavClass(viewContext, Links);
+        public static string ProjectsNavClass(ViewContext viewContext) => PageNavClass(viewContext, Projects);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 

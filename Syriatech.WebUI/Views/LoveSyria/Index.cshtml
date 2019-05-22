@@ -1,4 +1,4 @@
-﻿
+﻿@model Syriatech.Application.Projects.Queries.GetAllProjects.ProjectsListViewModel
 @{
     ViewData["Title"] = Localizer["Made with love in Syria"];
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization;
 @inject IViewLocalizer Localizer
 
-<div class="container">
+ 
     <h1>@Localizer["Made with love in Syria"]</h1>
     <hr />
     <p>@Localizer["You are browsing projects made with love in Syria."]<br /> <span class="text-muted">@Localizer["Do you want to list your project here?"] </span> <a asp-area="Identity" asp-page="/Account/Login">@Localizer["Join Community"]</a></p>
@@ -17,14 +17,12 @@
 
     <div class="row">
  
+        @foreach(var item in Model.Projects)
+        {
+            <p>@item.Title</p> // we will update this later
+        }
 
-    </div>
-    <div class="row justify-content-md-center">
-        
-    </div>
-</div>
-
-
+    </div>  
 
 
 

@@ -123,8 +123,14 @@
   <data name="Log in" xml:space="preserve">
     <value>تسجيل دخول</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
   <data name="Register as a new user" xml:space="preserve">
     <value>تسجيل حساب جديد</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>تذكرني</value>
   </data>
   <data name="There are no external authentication services provided for instance." xml:space="preserve">
     <value>خدمة التسجيل عبر فيس بوك معطلة حالياً</value>
@@ -134,5 +140,8 @@
   </data>
   <data name="Use another service to log in." xml:space="preserve">
     <value>استخدام وسيط للدخول</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>اسم المستخدم</value>
   </data>
 </root>

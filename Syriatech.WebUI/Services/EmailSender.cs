@@ -11,8 +11,8 @@ namespace Syriatech.WebUI.Services
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
             Options = optionsAccessor.Value;
-            Options.SendGridKey = "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";
-            Options.SendGridUser = "waleedchayeb";
+            Options.SendGridKey = "";
+            Options.SendGridUser = "";
         }
 
         public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
@@ -27,7 +27,7 @@ namespace Syriatech.WebUI.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("waleedchayeb2@gmail.com", "Waleed Chayeb"),
+                From = new EmailAddress("", ""),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

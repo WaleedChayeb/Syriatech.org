@@ -1,22 +1,28 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = Localizer["Profile"];
     ViewData["ActivePage"] = ManageNavPages.Index;
+    Layout = "~/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+
 }
 
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
+
     <div class="col-md-6">
-        <form id="profile-form" method="post">
+        <form id="profile-form" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Username"></label>
+                <label> @Localizer["Username"]</label>
                 <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                <label> @Localizer["Email"]</label>
                 @if (Model.IsEmailConfirmed)
                 {
                     <div class="input-group">
@@ -36,11 +42,134 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            <br />
+            <hr />
+            <br />
+            <div class="form-group">
+                <label asp-for="Input.FirstName"></label> <span style=" color:red;">*</span>
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LastName"></label> <span style=" color:red;">*</span>
+                <input asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">@Localizer["Gender"]</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Input.Gender" id="gridRadios1" value="Male" checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                @Localizer["Male"]
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="Input.Gender" id="gridRadios2" value="Female">
+                            <label class="form-check-label" for="gridRadios2">
+                                @Localizer["Female"]
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <label asp-for="Input.Dob"></label> <span style=" color:red;">*</span>
+                <input asp-for="Input.Dob" class="datepicker form-control" data-date-format="dd/mm/yyyy" />
+                <span asp-validation-for="Input.Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.City"></label>
+                <input asp-for="Input.City" class="form-control" />
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Input.Country"></label>
+                <select asp-for="Input.Country" class="form-control">
+                    <option>Syria</option>
+                </select>
+            </div>
+            <br />
+            <hr />
+            <br />
+            <div class="form-group">
+                <label asp-for="Input.Major"></label>
+                <select asp-for="Input.Major" class="form-control">
+                    @foreach (var item in (List<Syriatech.Application.Majors.Majors>)ViewData["majors"])
+                    {
+                        if (Localizer["Language"].Value == "ar")
+                        {
+                            <option value="@item.Id">@item.ASingularName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.ESingularName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Title"></label> <span style=" color:red;">*</span>
+                <input asp-for="Input.Title" class="form-control" />
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.YearsOfExperience"></label>
+                <input type="number" asp-for="Input.YearsOfExperience" class="form-control" />
+                <span asp-validation-for="Input.YearsOfExperience" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Input.Skills"></label>
+                <textarea asp-for="Input.Skills" class="form-control"></textarea>
+                <span asp-validation-for="Input.Skills" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Interests"></label>
+                <textarea asp-for="Input.Interests" class="form-control"></textarea>
+                <span asp-validation-for="Input.Interests" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.BestProject"></label>
+                <textarea asp-for="Input.BestProject" class="form-control"></textarea>
+                <span asp-validation-for="Input.BestProject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Bio"></label>
+                <textarea asp-for="Input.Bio" class="form-control"></textarea>
+                <span asp-validation-for="Input.Bio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Profile Picture</label>
+                <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+            </div>
+
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["Save"]</button>
+            <button id="publish-button" type="submit" asp-page-handler="Publish" class="btn btn-success">@Localizer["Publish"]</button>
+
+
+
         </form>
+    </div>
+    <div class="col-md-6">
+        @if (ViewData["Img"] != null)
+        {
+            <img class="img-thumbnail" src="@ViewData["Img"]" />
+        }
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(window).load(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
 }

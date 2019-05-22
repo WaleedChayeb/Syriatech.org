@@ -24,9 +24,8 @@ namespace Syriatech.WebUI.Areas.Identity.Pages.Account
 
         public RegisterModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            SignInManager<User> signInManager, ILogger<RegisterModel> logger, IEmailSender emailSender
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -41,6 +40,11 @@ namespace Syriatech.WebUI.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -68,29 +72,34 @@ namespace Syriatech.WebUI.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
+                if (Input.Username != "About" && Input.Username != "Contact" && Input.Username != "Events" && Input.Username != "Home" && Input.Username != "Log" && Input.Username != "LoveSyria" && Input.Username != "Profile" && Input.Username != "Copywrite")
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    var user = new Syriatech.Domain.Entities.User { UserName = Input.Username, Email = Input.Email };
+                    var result = await _userManager.CreateAsync(user, Input.Password);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code },
-                        protocol: Request.Scheme);
+                        //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        //var callbackUrl = Url.Page(
+                        //    "/Account/ConfirmEmail",
+                        //    pageHandler: null,
+                        //    values: new { userId = user.Id, code = code },
+                        //    protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(returnUrl);
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                ModelState.AddModelError(string.Empty, "Please use different Username.");
+
             }
 
             // If we got this far, something failed, redisplay form

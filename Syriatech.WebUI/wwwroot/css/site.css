@@ -7,6 +7,36 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+
+@media screen and (max-width: 600px) {
+    #typedwords {
+        visibility: hidden;
+        clear: both; 
+        display: none;
+    }
+
+}
+
+.object-fit_fill {
+    object-fit: fill
+}
+
+.object-fit_contain {
+    object-fit: contain
+}
+
+.object-fit_cover {
+    object-fit: cover
+}
+
+.object-fit_none {
+    object-fit: none
+}
+
+.object-fit_scale-down {
+    object-fit: scale-down
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -17,9 +47,16 @@ html {
     font-size: 16px;
   }
 }
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    /*Button disabled - CSS color class*/
+    color: #c0c0c0;
+    background-color: #ffffff;
+}
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
@@ -41,16 +78,71 @@ html {
   min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
+ /*body {
+   Margin bottom by footer height 
   margin-bottom: 60px;
-}
-.footer {
+}*/ 
+ 
+ /*.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  /* Set the fixed height of the footer here */
+   Set the fixed height of the footer here 
   height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;  Vertically center the text there 
+}*/ 
+
+
+.jumbotron {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+    background-color: #fff;
 }
+
+@media (min-width: 768px) {
+    .jumbotron {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+}
+
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.jumbotron-heading {
+    font-weight: 300;
+}
+
+.jumbotron .container {
+    max-width: 40rem;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+    footer p {
+        margin-bottom: .25rem;
+    }
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+ 
