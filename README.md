@@ -48,20 +48,20 @@ If you are interested in building an application on top of Syriatech.org you can
   
 ### Events 
 ``` 
-/api/v1/activities/
-/api/v1/activities/{id}
+/api/activities/
+/api/activities/{id}
 ```
   
 ### Profiles
 ``` 
-/api/v1/users
-/api/v1/users/{username}
+/api/users
+/api/users/{username}
 ```
   
 ### Projects
 ``` 
-/api/v1/projects
-/api/v1/projects/{id}
+/api/projects
+/api/projects/{id}
 ```
 
 ## Contributing
